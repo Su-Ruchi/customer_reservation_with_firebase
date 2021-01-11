@@ -6,10 +6,18 @@ Here is some description
 
 ## About
 
-3 screen in this app. The FIRST screen is for Home_Page in which there is one button and one draggable sheet. The draggablesheet is for owner with the email and password and that password and email are set with firebase.
-And that button is for customer_page my SECOND page. Customer will visit this page and fill the all details. I have also applied validate in all fields so that no-one can leave it empty feilds.
-When the customer details are filled then those details will be saved in my THIRD screen which can only be access by owner.
+3 screen in this app. 
+-->   The FIRST screen is for Home_Page in which there is one button and one draggable sheet. The draggablesheet is for owner with the email and password and that password and email are set with firebase.
+
+-->   And that button is for customer_page my SECOND page. Customer will visit this page and fill the all details. I have also applied validate in all fields so that no-one can leave it empty feilds.
+
+-->   When the customer details are filled then those details will be saved in my THIRD screen which can only be access by owner.
 I am using firebase in this app.
+
+## MY_HOMEPAGE 
+
+![homepage](https://user-images.githubusercontent.com/72338176/104213715-9e084a80-545c-11eb-9c80-d99c0efe1ee7.png)
+
 
 ## UI_Output
 
