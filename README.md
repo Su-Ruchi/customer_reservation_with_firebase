@@ -1,6 +1,15 @@
 # customer_reservation
 
-Using CRUD Operation With Firebase
+This app is for restaurant/hotels owner. Like 40 ,50 customer visits every day. So all owners have to save the customer details.
+So this app has same purpose. I apply CRUD OPERATION with firebase in which owner read customer details delete details.
+Here is some description
+
+## About
+
+3 screen in this app. The FIRST screen is for Home_Page in which there is one button and one draggable sheet. The draggablesheet is for owner with the email and password and that password and email are set with firebase.
+And that button is for customer_page my SECOND page. Customer will visit this page and fill the all details. I have also applied validate in all fields so that no-one can leave it empty feilds.
+When the customer details are filled then those details will be saved in my THIRD screen which can only be access by owner.
+I am using firebase in this app.
 
 ## UI_Output
 
