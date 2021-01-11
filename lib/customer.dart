@@ -1,9 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:customer_reservation/home_screen.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
 
 import 'message.dart';
 
@@ -16,6 +15,7 @@ class _CustomerState extends State<Customer> {
   var _formKey = GlobalKey<FormState>();
   var textColor = Colors.white;
 
+
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   TextEditingController name = TextEditingController();
@@ -26,9 +26,9 @@ class _CustomerState extends State<Customer> {
 
   @override
   Widget build(BuildContext context) {
-    var now = DateTime.now();
-    String formatDate = DateFormat.yMMMd().format(now);
-    String formatTime = DateFormat('mm:ss').format(now);
+ //   var now = DateTime.now();
+   /* String formatDate = DateFormat.yMMMd().format(now);
+    String formatTime = DateFormat('mm:ss').format(now);*/
 
     return Scaffold(
         body: Stack(children: [
@@ -119,9 +119,12 @@ class _CustomerState extends State<Customer> {
                                         Icons.person,
                                         color: Color(0xFF00008B),
                                       )),
-                                  validator: (val) => val.isEmpty
-                                      ? "Please type Your Name"
-                                      : null,
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return 'Please enter some text';
+                                    }
+                                    return null;
+                                  },
                                 ),
                               ),
                               SizedBox(
@@ -159,9 +162,15 @@ class _CustomerState extends State<Customer> {
                                       color: Color(0xFF00008B),
                                     ),
                                   ),
-                                  validator: (val) => val.isEmpty
-                                      ? "Please type Your Phone number"
-                                      : null,
+                                  validator: (val) {
+                                    if(val.isEmpty ){
+                                      return "Please enter phone number";
+                                    }
+                                    else if(val.length<10){
+                                      return "Please enter correct number";
+                                    }
+                                   return null;
+                                  }
                                 ),
                               ),
                               SizedBox(
@@ -201,7 +210,7 @@ class _CustomerState extends State<Customer> {
                                         color: Color(0xFF00008B),
                                       )),
                                   validator: (val) => val.isEmpty
-                                      ? "Please type your email"
+                                      ? "Please type a exact time"
                                       : null,
                                 ),
                               ),
@@ -313,17 +322,22 @@ class _CustomerState extends State<Customer> {
                                       "time": time.text,
                                       "date": date.text,
                                     };
-                                    Firestore.instance
-                                        .collection("details")
-                                        .add(data)
-                                        .then((value) => Message.showMessage(
-                                            "Thanks For Visit."))
-                                        .then((value) =>
-                                            Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        HomeScreen())));
+                                    if(_formKey.currentState.validate()){
+                                      FirebaseFirestore.instance
+                                          .collection("details")
+                                          .add(data)
+                                          .then((value) => Message.showMessage(
+                                          "Thanks For Visit."))
+                                          .then((value) =>
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      HomeScreen())));
+                                    }
+                                  else{
+                                      Message.showMessage("Please fill correct details");
+                                    }
                                   }),
                               SizedBox(
                                 height: 10.0,

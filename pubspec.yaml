@@ -30,6 +30,7 @@ dependencies:
   firebase_auth:
   intl:
   fluttertoast:
+  flutter_colored_progress_indicators:
 
 
   # The following adds the Cupertino Icons font to your application.
