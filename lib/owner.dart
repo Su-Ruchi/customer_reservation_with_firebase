@@ -7,7 +7,7 @@ class Owner extends StatefulWidget {
 }
 
 class _OwnerState extends State<Owner> {
-  final db = Firestore.instance;
+  final db = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -25,15 +25,16 @@ class _OwnerState extends State<Owner> {
                 ])),
           ),
         ),
-        body: StreamBuilder(
-          stream: Firestore.instance.collection("details").snapshots(),
+        body: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance.collection("details").snapshots(),
           builder: (context, snapshot) {
+            if(!snapshot.hasData) return Center(child: CircularProgressIndicator());
             return ListView.builder(
               padding: EdgeInsets.all(0),
               shrinkWrap: true,
-              itemCount: snapshot.data.documents.length,
+              itemCount: snapshot.data.docs.length,
               itemBuilder: (context, index) {
-                DocumentSnapshot details = snapshot.data.documents[index];
+                DocumentSnapshot details = snapshot.data.docs[index];
                 return Container(
                     child: Column(
                   children: [
@@ -94,16 +95,23 @@ class _OwnerState extends State<Owner> {
                                                 //SizedBox(width: 150,),
                                                 GestureDetector(
                                                     onTap: () {
-                                                      DocumentSnapshot ds =
-                                                          snapshot.data
-                                                              .documents[index];
-                                                      db
-                                                          .collection('details')
-                                                          .doc(ds.documentID)
-                                                          .delete()
-                                                          .then((value) =>
-                                                              Navigator.pop(
-                                                                  context));
+                                                      if (snapshot.data ==
+                                                          null) {
+                                                        return CircularProgressIndicator();
+                                                      } else {
+                                                        DocumentSnapshot ds =
+                                                            snapshot.data
+                                                                    .docs[
+                                                                index];
+                                                        db
+                                                            .collection(
+                                                                'details')
+                                                            .doc(ds.documentID)
+                                                            .delete()
+                                                            .then((value) =>
+                                                                Navigator.pop(
+                                                                    context));
+                                                      }
                                                     },
                                                     child: Container(
                                                       margin: EdgeInsets.only(
