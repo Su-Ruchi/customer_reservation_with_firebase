@@ -18,6 +18,11 @@ I am using firebase in this app.
 
 ![homepage](https://user-images.githubusercontent.com/72338176/104213715-9e084a80-545c-11eb-9c80-d99c0efe1ee7.png)
 
+## MY_CUSTOMER_SCREEN 
+
+![for_customer](https://user-images.githubusercontent.com/72338176/104213950-e162b900-545c-11eb-9c7b-8a566e856fb1.png)
+
+
 
 ## UI_Output
 
